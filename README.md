@@ -23,7 +23,7 @@ The current internet infrastructure has several weaknesses:
 Solutions
 =========
 
-Create a cooperative peer to peer distributed network not only to stora file data, but also to be able to communicate, creating a trust-based peer-to-peer social network, that can be used to distribute anything, from streaming media to messaging, and entire directory structures. Encryption will be mandatory, no exception. Data stored on disk will be encrypted using strong block-encryption methods (like GPG), and communications will be encrypted using strong streaming encryption methods (like RSA), with connections multiplexed to several encrypted streams with different keys (and possibly different encryption protocols), each stream's keys will be changed frequently through a different stream. This is so that even if a stream is stored in it's entirety, and one key cracked, the attacker has only acces to a small portion of the communication that has no meaning in itself. We know of the overhead of this encryption scheme, but we argue that since most bandwidth and cpu power is wasted anyways, it's not really a big issue.
+Create a cooperative peer to peer distributed network not only to stora file data, but also to be able to communicate, creating a trust-based peer-to-peer social network, that can be used to distribute anything, from streaming media to messaging, services (running processes), and entire directory structures. Encryption will be mandatory, no exception. Data stored on disk will be encrypted using strong block-encryption methods (like GPG), and communications will be encrypted using strong streaming encryption methods (like RSA), with connections multiplexed to several encrypted streams with different keys (and possibly different encryption protocols), each stream's keys will be changed frequently through a different stream. This is so that even if a stream is stored in it's entirety, and one key cracked, the attacker has only acces to a small portion of the communication that has no meaning in itself. We know of the overhead of this encryption scheme, but we argue that since most bandwidth and cpu power is wasted anyways, it's not really a big issue.
 
 The goal is to replace the following protocols among others:
   * SMTP
@@ -37,7 +37,25 @@ Technical decisions
 ===================
 
 I have chosen GO as the language I wish to implement the system in for a couple of reasons:
-  * It has founda  sweet-spot with regards to programming complexity and speed
+  * It has found a  sweet-spot with regards to programming complexity and speed
   * It has a good concurrency scheme built-in
   * Gophers
 
+Encryption
+----------
+
+  * Block encryption using GPG
+  * stream encryption using RSA (maybe mixing RSA with others in parallel streams)
+
+Distribution
+------------
+  * Currently the most advanced technology peer to peer lookups is a DHT, there are several candidates as to which type of DHT should be used
+    * Kademlia is the most widely used DHT
+    * Chord has better characteristics on paper, but seems to be more complicated to implement
+    * the method freenet (new version) uses also looks promising
+  * Data distribution: a modified version of the bittorrent protocol should work, wich allows for changing data inside a torrent
+
+Duplication of effort?
+======================
+
+I do not think I am duplicating the effort of any network. The closest one to my goal is the freenet project, but since it is written in java, it is very inefficient.
