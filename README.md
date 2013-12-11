@@ -55,6 +55,14 @@ Distribution
     * the method freenet (new version) uses also looks promising
   * Data distribution: a modified version of the bittorrent protocol should work, wich allows for changing data inside a torrent
 
+I really like the idea that plan9 used with Venti and Fossil. Venti is a block store, and fossil is a filesystem that builds on that. I would go further with the idea:
+  * A permanent block store for each user's own data
+  * a worm cache, that can use unused disk space to cache other user's data, and can simply be garbage collected by discarding the least used data
+
+In this scheme, when a user accesses an other user's data, the blocks are cached to his disk, creating multiple redundant and local copies of the blocks of each user's files.
+
+Streams should just be streams of block's hashes, which can then be fetched from the DHT.
+
 Duplication of effort?
 ======================
 
